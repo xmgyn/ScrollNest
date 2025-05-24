@@ -1,0 +1,21 @@
+body {
+    background-color: #090913;
+    margin: 0px;
+}
+
+#app {
+    height: 100dvh;
+    width: 100dvw;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 22% 53% 25%;
+}
+
+.merriweather-Medium {
+  font-family: "Merriweather", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
