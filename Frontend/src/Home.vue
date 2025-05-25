@@ -27,7 +27,6 @@
         </div>
         <div class="nav-Pane">
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
                 <div class="nav-Item-Icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -38,12 +37,10 @@
                             <path d="M15 18H9" stroke="#bf92ef" stroke-width="1.5" stroke-linecap="round"></path>
                         </g>
                     </svg></div>
-                <div class="Empty-Margin"></div>
                 <div class="nav-Item-Text merriweather-Medium">Home</div>
-                <div class="Empty-Margin"></div>
             </div>
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -56,12 +53,12 @@
                             </g>
                         </g>
                     </svg></div>
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Text merriweather-Medium">Trending</div>
-                <div class="Empty-Margin"></div>
+
             </div>
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Icon">
                     <svg viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Stock_cut" version="1.1"
                         xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
@@ -77,13 +74,13 @@
                         </g>
                     </svg>
                 </div>
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Text merriweather-Medium">Popular</div>
-                <div class="Empty-Margin"></div>
+
             </div>
             <div class="nav-Divider"></div>
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -93,12 +90,12 @@
                                 stroke="#bf92ef" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         </g>
                     </svg></div>
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Text merriweather-Medium">Gaming</div>
-                <div class="Empty-Margin"></div>
+
             </div>
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Icon"><svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" fill="#bf92ef">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -116,12 +113,12 @@
                                 fill="#bf92ef"> </path>
                         </g>
                     </svg></div>
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Text merriweather-Medium">News</div>
-                <div class="Empty-Margin"></div>
+
             </div>
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Icon"><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#bf92ef">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -134,12 +131,12 @@
                             </g>
                         </g>
                     </svg></div>
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Text merriweather-Medium">Art</div>
-                <div class="Empty-Margin"></div>
+
             </div>
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -149,12 +146,12 @@
                                 fill="#bf92ef"></path>
                         </g>
                     </svg></div>
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Text merriweather-Medium">Lifestyle</div>
-                <div class="Empty-Margin"></div>
+
             </div>
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Icon"><svg fill="#bf92ef" viewBox="0 0 1069 1069"
                         style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
                         version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
@@ -174,12 +171,12 @@
                             </g>
                         </g>
                     </svg></div>
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Text merriweather-Medium">Technology</div>
-                <div class="Empty-Margin"></div>
+
             </div>
             <div class="nav-Item">
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Icon"><svg fill="#bf92ef" viewBox="0 0 32 32" version="1.1"
                         xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -191,9 +188,9 @@
                             </path>
                         </g>
                     </svg></div>
-                <div class="Empty-Margin"></div>
+
                 <div class="nav-Item-Text merriweather-Medium">Travel</div>
-                <div class="Empty-Margin"></div>
+
             </div>
         </div>
     </div>
@@ -203,11 +200,17 @@
         </div>
     </div>
     <div class="Right-pane">
-        <div class="Search"></div>
         <div class="In-Your-Area">
-            <div class="map"><img src="/maps.jpg" alt=""></div>
+            <!-- <div class="map"><img src="/ms.jpg" alt=""></div> -->
         </div>
-        <div class="Login"></div>
+        <div class="Login">
+            <div class="Join-Us-Image"><img src="/join.png" alt=""></div>
+            <div class="Join-Us-Pane">
+                <div class="Join-Us-Header merriweather-Medium">Start Your Own Blogging Journey</div>
+                <div class="Join-Us-Login merriweather-Medium">Login</div>
+                <div class="Join-Us-SignUp merriweather-Medium">Sign Up</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -249,6 +252,7 @@ div.Create-Post {
 
 div.Create-Post:Hover {
     cursor: pointer;
+    background-color: #8e37eb;
 }
 
 div.nav-Pane {
@@ -275,6 +279,24 @@ div.nav-Item {
     margin: 7px 0px;
 }
 
+div.nav-Item:hover {
+    cursor: pointer;
+
+    div.nav-Item-Icon {
+        svg {
+            g {
+                path {
+                    stroke: white;
+                }
+            }
+        }
+    }
+
+    div.nav-Item-Text {
+        color: white;
+    }
+}
+
 div.nav-Item-Select {
     color: #8616fd;
 }
@@ -282,6 +304,7 @@ div.nav-Item-Select {
 div.nav-Item-Icon {
     height: 60%;
     justify-self: center;
+    grid-column: 2;
 
     svg {
         height: 100%;
@@ -291,10 +314,110 @@ div.nav-Item-Icon {
 div.nav-Item-Text {
     font-size: 17px;
     color: #bf92ef;
+    grid-column: 4;
 }
 
 
 div.Right-pane {
     border-left: 1px solid #101010;
+
+    div.In-Your-Area {
+        height: 35%;
+    }
+
+    div.Login {
+        height: 60%;
+        width: 90%;
+        justify-self: center;
+        border-radius: 20px;
+        position: relative;
+
+        div.Join-Us-Image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 20px;
+
+            img {
+                height: 80%;
+                width: 100%;
+                border-radius: 20px;
+                transition: 0.7s ease-in;
+                transform-origin: center;
+            }
+        }
+
+        div.Join-Us-Pane {
+            bottom: 0px;
+            position: absolute;
+            width: 100%;
+            height: 25%;
+            background: #000000;
+            border-radius: 0px 0px 20px 20px;
+            display: grid;
+            grid-template-columns: 8% 40% 4% 40% 8%;
+            grid-template-rows: 50%;
+
+            div.Join-Us-Header {
+                grid-column: span 5;
+                grid-row: 1;
+                font-size: 21px;
+                text-align: center;
+                margin: 22px;
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            div.Join-Us-Login {
+                grid-row: 2;
+                grid-column: 2;
+                background: #0e0e0e;
+                height: 70%;
+                border-radius: 10px;
+                width: 100%;
+                justify-self: center;
+                color: #ffffff;
+                font-size: 18px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            div.Join-Us-Login:hover {
+                background: #292929;
+            }
+
+            div.Join-Us-SignUp {
+                grid-row: 2;
+                grid-column: 4;
+                background: #8616fd;
+                height: 70%;
+                border-radius: 10px;
+                width: 100%;
+                justify-self: center;
+                color: #ffffff;
+                font-size: 18px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            div.Join-Us-SignUp:hover {
+                background: #8e37eb;
+            }
+        }
+    }
+
+    div.Login:hover {
+        cursor: pointer;
+
+        div.Join-Us-Image {
+            img {
+                transform: scale(1.15);
+            }
+        }
+    }
 }
 </style>
