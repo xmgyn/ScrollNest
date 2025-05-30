@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
 import Home from './Home.vue';
+import Blog from './Blog.vue'
 
 const routes = [
   {
@@ -10,7 +11,8 @@ const routes = [
   },
   {
     path: '/blog/:userid/:blogid',
-    redirect: '/'
+    name: 'blog',
+    component: Blog
   },
   {
     path: '/authenticate',

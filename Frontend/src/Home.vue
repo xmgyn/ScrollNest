@@ -1,9 +1,9 @@
 <template>
-    <Splash v-if="!completeLoaded" />
+    <Splash v-if="!completeLoaded" @token="setToken" @dataArray="setData" @setLoading="setLoading" />
     <div class="App" v-if="completeLoaded">
         <div class="Left-pane">
             <div class="Logo"><img src="/Logo-Big.jpg"> </div>
-            <div class="Create-Post" @click="showCreatePost = true">
+            <div class="Create-Post" @click="openCreatePost">
                 <div class="Create-Post-Icon">
                     <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -198,18 +198,194 @@
             </div>
         </div>
         <div class="Center-pane">
+            <div class="Data-pane" v-if="!dataLoading">
+                <div v-for="(item) in data" :key="item.BlogID" class="Card">
+                    <div class="Item-Interact">
+                        <div class="Like merriweather-Medium">
+                            <svg fill="#FFFFFF" height="200px" width="200px" version="1.1" id="Layer_1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 512.001 512.001" xml:space="preserve" stroke="#FFFFFF"
+                                stroke-width="0.0051200099999999995">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M453.625,114.547c-6.441-6.554-16.978-6.646-23.535-0.206c-6.556,6.443-6.648,16.98-0.205,23.536 c31.489,32.045,48.831,75.395,48.831,122.067c0,40.371-13.103,77.293-40.058,112.877c-5.55,7.327-4.11,17.767,3.218,23.316 c3.006,2.277,6.535,3.377,10.037,3.377c5.033,0,10.006-2.274,13.279-6.594c31.499-41.583,46.81-85.081,46.81-132.977 C512,204.492,491.269,152.857,453.625,114.547z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M81.91,114.341c-6.556-6.442-17.093-6.347-23.535,0.206C20.731,152.856,0,204.492,0,259.944 c0,47.896,15.312,91.394,46.811,132.977c3.273,4.322,8.246,6.594,13.279,6.594c3.5,0,7.031-1.101,10.037-3.377 c7.327-5.551,8.767-15.989,3.216-23.316c-26.954-35.583-40.058-72.505-40.058-112.877c0-46.672,17.342-90.023,48.83-122.067 C88.558,131.321,88.466,120.784,81.91,114.341z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M99.856,259.944c0-28.649,10.511-55.227,29.599-74.842c6.41-6.587,6.267-17.124-0.321-23.534 c-6.588-6.409-17.124-6.265-23.534,0.321c-25.169,25.864-39.03,60.686-39.03,98.055c0,34.52,11.947,66.339,36.522,97.275 c3.285,4.137,8.14,6.292,13.042,6.292c3.627,0,7.281-1.18,10.341-3.613c7.197-5.717,8.397-16.187,2.679-23.383 C109.166,311.352,99.856,287.022,99.856,259.944z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M406.399,161.889c-6.411-6.588-16.947-6.73-23.534-0.321s-6.73,16.947-0.321,23.534 c19.087,19.615,29.599,46.194,29.599,74.842c0,27.078-9.31,51.408-29.3,76.572c-5.717,7.196-4.518,17.666,2.68,23.383 c3.061,2.431,6.714,3.613,10.341,3.613c4.901,0,9.756-2.156,13.042-6.292c24.576-30.936,36.522-62.755,36.522-97.275 C445.429,222.576,431.568,187.753,406.399,161.889z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M360.116,209.969c-12.78-14.062-30.455-21.806-49.772-21.806c-25.802,0-43.286,13.704-54.344,27.479 c-11.058-13.776-28.543-27.479-54.344-27.479c-19.317,0-36.991,7.744-49.769,21.806c-12.089,13.304-18.746,31.052-18.746,49.976 c0,44.517,38.711,76.96,92.288,121.864c6.389,5.354,12.993,10.89,19.804,16.669c3.106,2.636,6.938,3.953,10.769,3.953 s7.663-1.318,10.769-3.953c6.81-5.779,13.415-11.315,19.804-16.669c53.578-44.904,92.288-77.347,92.288-121.864 C378.862,241.021,372.205,223.273,360.116,209.969z M265.193,356.299c-3.016,2.526-6.079,5.095-9.192,7.711 c-3.114-2.616-6.177-5.185-9.192-7.711c-46.666-39.112-80.383-67.371-80.383-96.354c0-18.662,12.348-38.497,35.231-38.497 c26.741,0,38.092,31.328,38.607,32.794c2.31,6.717,8.616,11.269,15.724,11.269c7.133,0,13.458-4.506,15.748-11.26 c0.469-1.339,11.812-32.802,38.61-32.802c22.884,0,35.231,19.835,35.231,38.497C345.576,288.928,311.859,317.186,265.193,356.299z ">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            {{ item.Likes }}
+                        </div>
+                        <div class="Views merriweather-Medium">
+                            <svg width="82px" height="82px" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M21 3L14 9L10 5L3 11M4.5 21C3.67157 21 3 20.3284 3 19.5V17.5C3 16.6716 3.67157 16 4.5 16C5.32843 16 6 16.6716 6 17.5V19.5C6 20.3284 5.32843 21 4.5 21ZM11.5 21C10.6716 21 10 20.3284 10 19.5V14.5C10 13.6716 10.6716 13 11.5 13C12.3284 13 13 13.6716 13 14.5V19.5C13 20.3284 12.3284 21 11.5 21ZM18.5 21C17.6716 21 17 20.3284 17 19.5V16.5C17 15.6716 17.6716 15 18.5 15C19.3284 15 20 15.6716 20 16.5V19.5C20 20.3284 19.3284 21 18.5 21Z"
+                                        stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </g>
+                            </svg>
+                            {{ item.Views }}
+                        </div>
+                        <div class="Share">
+                            <svg viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M13.47 4.13998C12.74 4.35998 12.28 5.96 12.09 7.91C6.77997 7.91 2 13.4802 2 20.0802C4.19 14.0802 8.99995 12.45 12.14 12.45C12.34 14.21 12.79 15.6202 13.47 15.8202C15.57 16.4302 22 12.4401 22 9.98006C22 7.52006 15.57 3.52998 13.47 4.13998Z"
+                                        stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </g>
+                            </svg>
+                            0
+                        </div>
+                    </div>
+                    <div class="Image-Items">
+                        <img src="/airplane-flying-low-over-snowy-600nw-2496851013.webp" alt="">
+                        <img src="/pexels-photo-1371360.jpeg" alt="">
+                        <img src="/photo-1707343848552-893e05dba6ac.jpg" alt="">
+                        <img src="/intro-1672072042.jpg" alt="">
+                    </div>
+                    <div class="Heading" v-html="decode(item.Heading)"></div>
+                    <div class="SubHeading" v-html="decode(item.SubHeading)"></div>
+                    <div class="Expand">
+                        <div class="Readtime">{{ item.ReadTime }} Minutes Reading</div>
+                        <div class="RedirectDiv" @click="redirectToLink(`/blog/undef/${item.BlogID}`)">
+                            Read The Blog
+                        </div>
+                    </div>
 
-            <div class="Spinner">
+                    <div class="Time">{{ item.Date }} Min Ago</div>
+                </div>
+                <div class="Pagination">
+                    <div class="Block Block-Active merriweather-Medium" @click="changePage(1)">1</div>
+                    <div class="Block merriweather-Medium" @click="changePage(2)">2</div>
+                    <div class="Block merriweather-Medium" @click="changePage(3)">3</div>
+                    <div class="Block merriweather-Medium" @click="changePage(4)">4</div>
+                    <div class="Block merriweather-Medium" @click="changePage(5)">5</div>
+                    <div class="Block merriweather-Medium" @click="changePage(6)">6</div>
+                    <div class="Block merriweather-Medium" @click="changePage(7)">7</div>
+                    <div class="Block merriweather-Medium" @click="changePage(8)">8</div>
+                </div>
             </div>
-            <div class="Pagination">
-
+            <div class="Spinner" v-if="dataLoading">
             </div>
         </div>
         <div class="Right-pane">
             <div class="In-Your-Area">
                 <!-- <div class="map"><img src="/ms.jpg" alt=""></div> -->
             </div>
-            <div class="Login">
+            <div class="Account-Block" v-if="isLoggedIn">
+                <div class="Account-Activity"></div>
+                <div class="Account-Summary">
+                    <div class="Account-Logout" @click="setToken(null)">
+                        <svg fill="#8616fd" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+                            xmlns:serif="http://www.serif.com/"
+                            style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <rect id="Icons" x="-192" y="-320" width="1280" height="800" style="fill:none;"></rect>
+                                <g id="Icons1" serif:id="Icons">
+                                    <g id="Strike"> </g>
+                                    <g id="H1"> </g>
+                                    <g id="H2"> </g>
+                                    <g id="H3"> </g>
+                                    <g id="list-ul"> </g>
+                                    <g id="hamburger-1"> </g>
+                                    <g id="hamburger-2"> </g>
+                                    <g id="list-ol"> </g>
+                                    <g id="list-task"> </g>
+                                    <g id="trash"> </g>
+                                    <g id="vertical-menu"> </g>
+                                    <g id="horizontal-menu"> </g>
+                                    <g id="sidebar-2"> </g>
+                                    <g id="Pen"> </g>
+                                    <g id="Pen1" serif:id="Pen"> </g>
+                                    <g id="clock"> </g>
+                                    <g id="external-link"> </g>
+                                    <g id="hr"> </g>
+                                    <g id="info"> </g>
+                                    <g id="warning"> </g>
+                                    <g id="plus-circle"> </g>
+                                    <g id="minus-circle"> </g>
+                                    <g id="vue"> </g>
+                                    <g id="cog"> </g>
+                                    <g id="logo"> </g>
+                                    <g id="radio-check"> </g>
+                                    <g id="eye-slash"> </g>
+                                    <g id="eye"> </g>
+                                    <g id="toggle-off"> </g>
+                                    <g id="shredder"> </g>
+                                    <g id="spinner--loading--dots-" serif:id="spinner [loading, dots]"> </g>
+                                    <g id="react"> </g>
+                                    <g id="check-selected"> </g>
+                                    <g id="turn-off">
+                                        <path
+                                            d="M40,14.62c7.91,3.16 13.505,10.896 13.505,19.928c0,11.838 -9.611,21.449 -21.449,21.449c-11.838,0 -21.449,-9.611 -21.449,-21.449c0,-8.99 5.542,-16.695 13.393,-19.883l0,4.332c-5.616,2.918 -9.456,8.789 -9.456,15.551c0,9.665 7.847,17.512 17.512,17.512c9.665,0 17.512,-7.847 17.512,-17.512c0,-6.806 -3.891,-12.711 -9.568,-15.608l0,-4.32Z">
+                                        </path>
+                                        <path
+                                            d="M34.056,9.886c0,-1.104 -0.896,-2 -2,-2c-1.104,0 -2,0.896 -2,2l0,24c0,1.104 0.896,2 2,2c1.104,0 2,-0.896 2,-2l0,-24Z">
+                                        </path>
+                                    </g>
+                                    <g id="code-block"> </g>
+                                    <g id="user"> </g>
+                                    <g id="coffee-bean"> </g>
+                                    <g id="coffee-beans">
+                                        <g id="coffee-bean1" serif:id="coffee-bean"> </g>
+                                    </g>
+                                    <g id="coffee-bean-filled"> </g>
+                                    <g id="coffee-beans-filled">
+                                        <g id="coffee-bean2" serif:id="coffee-bean"> </g>
+                                    </g>
+                                    <g id="clipboard"> </g>
+                                    <g id="clipboard-paste"> </g>
+                                    <g id="clipboard-copy"> </g>
+                                    <g id="Layer1"> </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="Login" v-if="!isLoggedIn">
                 <div class="Join-Us-Image"><img src="/join.jpg" alt=""></div>
                 <div class="Join-Us-Pane">
                     <div class="Join-Us-Header merriweather-Medium">Start Your Own Blogging Journey</div>
@@ -221,9 +397,10 @@
             </div>
         </div>
     </div>
-    <Authenticate v-if="showAuthentication" @show="updateShowAuthentication" :type="loginType" @updatemsg="updateMessage" @token="setToken" />
-    <CreatePost v-if="showCreatePost" @close="showCreatePost = false" />
-    <Message v-if="showMessage" :type="MessageType" :msg="Message"/>
+    <Authenticate v-if="showAuthentication" @show="updateShowAuthentication" :type="loginType"
+        @updatemsg="updateMessage" @token="setToken" />
+    <CreatePost v-if="showCreatePost" :token="token" @close="showCreatePost = false" />
+    <Message v-if="showMessage" :type="MessageType" :msg="Message" />
 </template>
 
 <script>
@@ -236,7 +413,7 @@ export default {
     data() {
         return {
             showCreatePost: false,
-            completeLoaded: true,
+            completeLoaded: false,
             showAuthentication: false,
             showMessage: false,
             loginType: "Login",
@@ -244,12 +421,23 @@ export default {
             Message: "",
             timeoutId: null,
             token: null,
+            data: [],
+            dataLoading: false,
+            sno: 0,
+            eno: 3,
         };
     },
     methods: {
         updateShowAuthentication(login) {
             this.loginType = login;
             this.showAuthentication = !this.showAuthentication;
+        },
+        setLoading() {
+            this.completeLoaded = true;
+            if (!this.token) this.updateShowAuthentication('Login');
+        },
+        setData(data) {
+            this.data = data;
         },
         updateMessage(type, msg) {
             if (this.timeoutId) clearTimeout(this.timeoutId);
@@ -261,7 +449,43 @@ export default {
             }, 5000);
         },
         setToken(token) {
+            localStorage.removeItem('token');
+            localStorage.setItem('token', token);
             this.token = token;
+        },
+        openCreatePost() {
+            if (this.token) this.showCreatePost = true
+            else {
+                this.updateShowAuthentication('Login');
+            }
+        },
+        redirectToLink(link) {
+            this.$router.push(link);
+        },
+        decode(str) {
+            const item = new TextDecoder("utf-8").decode(new Uint8Array(str.data));
+            return decodeURIComponent(escape(atob(item)));
+        },
+        async changePage(page) {
+            this.dataLoading = true;
+            this.sno = (page - 1) * 3;
+            this.eno = page * 3;
+
+            console.log(this.sno + " " + this.eno)
+            try {
+                const response = await fetch(`http://localhost:3000/blogs?sno=${this.sno}&eno=${this.eno}`);
+                const data = await response.json();
+                this.data = data;
+                this.dataLoading = false;
+            } catch (error) {
+                console.error("Error fetching blogs:", error);
+            }
+        },
+    },
+
+    computed: {
+        isLoggedIn() {
+            return this.token !== null;
         }
     },
     components: {
@@ -393,6 +617,34 @@ div.Right-pane {
         height: 35%;
     }
 
+    div.Account-Block {
+        height: 60%;
+        width: 90%;
+        justify-self: center;
+        border-radius: 20px;
+        position: relative;
+
+        div.Account-Activity {
+            height: 50%;
+            width: 100%;
+        }
+
+        div.Account-Summary {
+            background-color: #000000b3;
+            height: 50%;
+            width: 100%;
+            border-radius: 15px;
+
+            div.Account-Logout {
+                height: 100%;
+
+                svg {
+                    height: 20%;
+                }
+            }
+        }
+    }
+
     div.Login {
         height: 60%;
         width: 90%;
@@ -489,10 +741,152 @@ div.Right-pane {
     }
 }
 
+
 div.Center-pane {
+    display: grid;
+    grid-template-columns: 1fr 95% 1fr;
+}
+
+div.Data-pane {
+    height: 100%;
+    grid-column: 2;
+    width: 95%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    scrollbar-color: #8e37eb black;
+    scrollbar-width: thin;
+
+    div.Pagination {
+        width: 92%;
+        min-height: 4%;
+        border-radius: 5px;
+        margin: 2%;
+        background: #8616fd;
+        display: flex;
+        align-self: center;
+
+        div.Block {
+            height: inherit;
+            width: 10%;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border: 2px solid #eabeff;
+        }
+
+        div.Block:Hover {
+            cursor: pointer;
+            background-color: #eabeff;
+        }
+
+        div.Block-Active {
+            background: #ffffff;
+            color: black;
+        }
+    }
+}
+
+div.Card {
+    height: 45%;
+    width: 90%;
+    margin: 2% 5%;
+    justify-self: center;
+    background: #000000;
+    border-radius: 20px;
+    color: white;
+    position: relative;
+
+
+    div.Item-Interact {
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        display: none;
+        background: #000000;
+        border: 2px solid #8616fd;
+        width: 40%;
+        border-radius: 10px;
+        height: 12%;
+
+        div {
+            height: 100%;
+            width: 33%;
+            display: flex;
+            font-size: 1.7rem;
+            justify-content: space-evenly;
+            align-items: center;
+
+            svg {
+                height: 100%;
+                width: 40%;
+            }
+        }
+
+        div:first-child {
+            border-right: 1px solid white;
+        }
+
+        div:last-child {
+            border-left: 1px solid white;
+        }
+    }
+}
+
+div.Card:Hover {
+    div.Item-Interact {
+        display: flex;
+    }
+
+    div.Expand {
+        display: flex;
+    }
+}
+
+div.Image-Items {
+    column-count: 2;
+    overflow: hidden;
+    height: 175px;
+    column-gap: 0px;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 50%;
+        object-fit: cover;
+    }
+}
+
+div.Heading {
+    font-size: 25px;
+    text-align: center;
+}
+
+div.Time {
+    position: absolute;
+    bottom: -22px;
+}
+
+div.Expand {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    height: 10%;
+    width: 40%;
+    border-radius: 10px;
+    justify-self: anchor-center;
+    justify-content: space-between;
+}
+
+div.RedirectDiv {
+    background: green;
+    width: 50%;
+    border-radius: 20px;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
 }
 
 div.Spinner {

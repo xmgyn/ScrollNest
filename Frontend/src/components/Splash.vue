@@ -7,10 +7,32 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
+
 export default {
     name: "LoadingScreen",
-    props: ["isLoading"]
+    props: ["isLoading"],
+    setup(props, { emit }) {
+        onMounted(() => {
+            const token = localStorage.getItem('token');
+            if (token !== "null") {
+                emit("token", token);
+            }
+            fetch('http://localhost:3000/blogs?sno=0&eno=3')
+                .then(response => response.json())
+                .then(data => {
+                    emit("dataArray", data)
+                    emit("setLoading");
+                }
+                )
+                .catch(error => console.error('Error:', error));
+
+
+
+        });
+    }
 };
+
 </script>
 
 <style scoped>

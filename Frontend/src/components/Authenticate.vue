@@ -97,9 +97,12 @@ export default {
             })
             .then(response => {
                 if(response.status !== 200) throw new Error(response.statusText)
+                this.toggleForm();
                 return response.json()
         })
-            .then(data => this.$emit("updatemsg", "Success", data.message))
+            .then(data => {
+                this.$emit("updatemsg", "Success", data.message)
+            })
             .catch(error => this.$emit("updatemsg", "Error", error));
 
 

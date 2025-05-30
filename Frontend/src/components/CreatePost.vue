@@ -34,6 +34,10 @@
         <Textarea selector="Content" />
       </div>
     </div>
+    <div class="Create-Post-Settings">
+      <div class="Apply" @click="submitPost">Apply</div>
+      <div class="Close" @click="closeWindow">Close</div>
+    </div>
   </div>
 </template>
 
@@ -44,6 +48,44 @@ export default {
   name: 'CreatePost',
   components: {
     Textarea
+  },
+  props: ['token'],
+  methods: {
+    closeWindow() {
+      this.$emit('close');
+    },
+    async submitPost() {
+      const encodeBase64 = (str) => btoa(unescape(encodeURIComponent(str || "")));
+
+      const formData = {
+        Title: "Sample Title",
+        ReadTime: 10,
+        Heading: encodeBase64(tinymce.get("Heading")?.getContent()), // Convert HTML to Base64
+        SubHeading: encodeBase64(tinymce.get("SubHeading")?.getContent()),
+        Content: encodeBase64(tinymce.get("Content")?.getContent()),
+      };
+
+      if (!this.token) console.log("Please login first");
+
+      try {
+        const response = await fetch("http://localhost:3000/blog", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          console.log("Post submitted successfully!");
+        } else {
+          console.error("Failed to submit post:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error submitting post:", error);
+      }
+    }
   }
 };
 </script>
@@ -69,6 +111,32 @@ div.Create-Post-Contents {
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: white black;
+}
+
+div.Create-Post-Settings {
+  height: 25%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin: 14px;
+  color: white;
+
+  div {
+    border: 2px solid white;
+    width: 20%;
+    margin: 10px;
+    text-align: center;
+    align-content: center;
+    border-radius: 15px;
+  }
+
+  div:hover {
+    cursor: pointer;
+  }
+
+  div.Close {
+    background-color: red;
+  }
 }
 
 div.Block {
